@@ -26,6 +26,7 @@ function Post({ singlePost }) {
               postAuthor={singlePost.author}
               postTime={singlePost.timestamp}
               singlePostCall={singlePostCall}
+              postContractAddress={singlePost.contractAddress}
             />
 
             <PostBody

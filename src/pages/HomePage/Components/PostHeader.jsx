@@ -1,7 +1,12 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { OptionsIcon } from "../../../assets/Icons";
 
-function PostHeader({ postAuthor, postTime, singlePostCall }) {
+function PostHeader({
+  postAuthor,
+  postTime,
+  singlePostCall,
+  postContractAddress,
+}) {
   const walletAddressFormatter = (str) => {
     const begin = str.substring(0, 7);
     const end = str.slice(-4);
@@ -43,7 +48,12 @@ function PostHeader({ postAuthor, postTime, singlePostCall }) {
             singlePostCall ? postTime : time
           }`}</h2>
         </div>
-        <div className="cursor-pointer">
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            navigator.clipboard.writeText(postContractAddress);
+          }}
+        >
           <OptionsIcon />
         </div>
       </div>

@@ -26,6 +26,7 @@ function Input() {
 
   const filePickerRef = useRef();
 
+  const refresh = () => window.location.reload(true);
   const progressCallback = (progressData) => {
     let percentageDone =
       100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
@@ -99,6 +100,7 @@ function Input() {
       setPostText("");
       setPostImage([]);
       setSelectedFile([]);
+      refresh();
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong");
