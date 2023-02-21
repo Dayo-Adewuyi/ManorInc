@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/24/solid";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectKitButton } from "connectkit";
 import { AppContext } from "../../context/AppContext";
 import { disconnect } from "@wagmi/core";
 import { useAccount } from "wagmi";
@@ -65,11 +65,7 @@ function SideBar() {
             Disconnect
           </button>
         ) : (
-          <ConnectButton
-            chainStatus="none"
-            showBalance={false}
-            accountStatus="none"
-          />
+          <ConnectKitButton />
         )}
         <div className="flex justify-around w-4/5 items-center mt-12">
           <Cog6ToothIcon className="h-8" />

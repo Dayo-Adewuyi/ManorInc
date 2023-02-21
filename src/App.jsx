@@ -5,55 +5,26 @@ import NotificationPage from "./pages/NotificationPage";
 import SinglePostPage from "./pages/SinglePostPage";
 import SubscriptionPage from "./pages/SubscriptionPage";
 import { AppContextProvider } from "./context/AppContext";
-import "@rainbow-me/rainbowkit/styles.css";
-import { useEffect } from "react";
-import {
-  getDefaultWallets,
-  midnightTheme,
-  RainbowKitProvider,
-} from "@rainbow-me/rainbowkit";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  polygonMumbai,
-} from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
-import { publicProvider } from "wagmi/providers/public";
+
+import { WagmiConfig, createClient } from "wagmi";
+import { filecoinHyperspace } from "wagmi/chains";
+import { ConnectKitProvider, getDefaultClient } from "connectkit";
 
 function App() {
-  const { chains, provider } = configureChains(
-    [mainnet, polygon, optimism, polygonMumbai],
-    [
-      alchemyProvider({
-        apiKey: "5KDjAA4AsLn0LEiseL9UCUZu4lgR0IrY",
-      }),
-      publicProvider(),
-    ]
+  const client = createClient(
+    getDefaultClient({
+      appName: "Manor inc",
+      //infuraId: process.env.REACT_APP_INFURA_ID,
+      //alchemyId:  process.env.REACT_APP_ALCHEMY_ID,
+      chains: [filecoinHyperspace],
+    })
   );
-
-  const { connectors } = getDefaultWallets({
-    appName: "Manor",
-    chains,
-  });
-
-  const wagmiClient = createClient({
-    autoConnect: true,
-    connectors,
-    provider,
-  });
 
   return (
     <>
       <AppContextProvider>
-        <WagmiConfig client={wagmiClient}>
-          <RainbowKitProvider
-            chains={chains}
-            modalSize="compact"
-            theme={midnightTheme()}
-          >
+        <WagmiConfig client={client}>
+          <ConnectKitProvider theme="auto">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/explore" element={<ExplorePage />} />
@@ -61,7 +32,7 @@ function App() {
               <Route path="/post/:postId" element={<SinglePostPage />} />
               <Route path="/subscriptions" element={<SubscriptionPage />} />
             </Routes>
-          </RainbowKitProvider>
+          </ConnectKitProvider>
         </WagmiConfig>
       </AppContextProvider>
     </>

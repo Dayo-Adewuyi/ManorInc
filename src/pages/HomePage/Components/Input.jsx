@@ -59,12 +59,12 @@ function Input() {
     try {
       if (NFTPrice.length > 0) {
         const provider = new ethers.providers.JsonRpcProvider(
-          "https://polygon-mumbai.g.alchemy.com/v2/5KDjAA4AsLn0LEiseL9UCUZu4lgR0IrY"
+          "https://api.hyperspace.node.glif.io/rpc/v1"
         );
         const privatekey = import.meta.env.VITE_PRIVATE_KEY;
         const wallet = new ethers.Wallet(privatekey, provider);
         const options = {
-          gasLimit: 10000000,
+          gasLimit: 100000000000,
           gasPrice: ethers.utils.parseUnits("100.0", "gwei"),
         };
         // Deploy the contract
@@ -72,8 +72,7 @@ function Input() {
         const contract = await factory.deploy(
           ethers.utils.parseEther(NFTPrice),
           "xxx",
-          address,
-          options
+          address
         );
         contractAddress = await contract.deployed();
         return contractAddress.address;
