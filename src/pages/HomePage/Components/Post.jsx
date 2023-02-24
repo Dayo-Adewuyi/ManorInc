@@ -13,7 +13,10 @@ function Post({ singlePost }) {
 
   return (
     <>
-      <div className="flex gap-[15px] px-[29px] py-[29px] w-full rounded-[14px] shadow-custom">
+      <div
+        
+        className="flex gap-[15px] px-[29px] py-[29px] w-full rounded-[14px] shadow-custom"
+      >
         <img src={Lebron} alt="" className="w-[44px] h-[44px] rounded-[14px]" />
         <div className="flex-grow">
           <div
